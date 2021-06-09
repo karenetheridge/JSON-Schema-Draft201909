@@ -11,18 +11,19 @@ use Test::More;
 use lib 't/lib';
 use Acceptance;
 
+my $version = 'draft2019-09';
+
 acceptance_tests(
   acceptance => {
-    specification => 'draft2019-09',
-    test_dir => 't/invalid-schemas',
+    specification => $version,
+    test_dir => 't/invalid-schemas-'.$version,
     include_optional => 0,
     test_schemas => 0,
   },
   evaluator => {
-    specification_version => 'draft2019-09',
     validate_formats => 1,
   },
-  output_file => 'draft2019-09-invalid-schemas.txt',
+  output_file => $version.'-invalid-schemas.txt',
 );
 
 done_testing;
