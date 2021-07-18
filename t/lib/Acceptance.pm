@@ -40,7 +40,7 @@ sub acceptance_tests {
     if not $ENV{TEST_DIR} and $options{acceptance}{test_subdir};
 
   my $js = JSON::Schema::Draft201909->new(%{$options{evaluator}});
-  my $js_short_circuit = JSON::Schema::Draft201909->new(%{$options{evaluator}}, short_circuit => 1);
+  my $js_short_circuit = $ENV{NO_SHORT_CIRCUIT} || JSON::Schema::Draft201909->new(%{$options{evaluator}}, short_circuit => 1);
 
   my $encoder = JSON::MaybeXS->new(allow_nonref => 1, utf8 => 0, convert_blessed => 1, canonical => 1, pretty => 1);
   $encoder->indent_length(2) if $encoder->can('indent_length');
@@ -49,7 +49,7 @@ sub acceptance_tests {
     my ($uri, $schema) = @_;
     try {
       $js->add_schema($uri => $schema);
-      $js_short_circuit->add_schema($uri => $schema);
+      $js_short_circuit->add_schema($uri => $schema) if not $ENV{NO_SHORT_CIRCUIT};
     }
     catch ($e) {
       die $e->$_isa('JSON::Schema::Draft201909::Result') ? $encoder->encode($e->TO_JSON) : $e;
@@ -90,7 +90,8 @@ sub acceptance_tests {
   );
 
   memory_cycle_ok($js, 'no leaks in the main evaluator object');
-  memory_cycle_ok($js_short_circuit, 'no leaks in the short-circuiting evaluator object');
+  memory_cycle_ok($js_short_circuit, 'no leaks in the short-circuiting evaluator object')
+    if not $ENV{NO_SHORT_CIRCUIT};
 
   path('t/results/'.$options{output_file})->spew_utf8($accepter->results_text)
     if -d '.git' or $ENV{AUTHOR_TESTING} or $ENV{RELEASE_TESTING};
