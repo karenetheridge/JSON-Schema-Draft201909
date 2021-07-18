@@ -17,10 +17,12 @@ use Test::JSON::Schema::Acceptance 1.008;
 use Test::Memory::Cycle;
 use JSON::Schema::Draft201909;
 
-foreach my $env (qw(AUTHOR_TESTING AUTOMATED_TESTING EXTENDED_TESTING NO_TODO TEST_DIR NO_SHORT_CIRCUIT)) {
-  note $env.': '.($ENV{$env} // '');
+BEGIN {
+  foreach my $env (qw(AUTHOR_TESTING AUTOMATED_TESTING EXTENDED_TESTING NO_TODO TEST_DIR NO_SHORT_CIRCUIT)) {
+    note $env.': '.($ENV{$env} // '');
+  }
+  note '';
 }
-note '';
 
 sub acceptance_tests {
   my (%options) = @_;
