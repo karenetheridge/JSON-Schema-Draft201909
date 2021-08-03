@@ -8,7 +8,7 @@ JSON::Schema::Draft201909 - (DEPRECATED) Validate data against a schema
 
 =head1 VERSION
 
-version 0.128
+version 0.129
 
 =head1 DESCRIPTION
 

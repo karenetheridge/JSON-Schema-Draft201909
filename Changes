@@ -1,6 +1,6 @@
 Revision history for JSON-Schema-Draft201909
 
-{{$NEXT}}
+0.129     2021-08-03 05:13:53Z
           - unnecessary prereqs on JSON::Schema::Modern::* submodules have
             been removed
           - JSON::Schema::Draft201909::* submodules have been removed from the
