@@ -1,6 +1,10 @@
 Revision history for JSON-Schema-Draft201909
 
 {{$NEXT}}
+          - most tests have been removed, as version inconsistencies between
+            Test::JSON::Schema::Acceptance and JSON::Schema::Modern can cause
+            spurious results for cpantesters machines. When in doubt, use the
+            latest version of all dependencies.
 
 0.129     2021-08-03 05:13:53Z
           - unnecessary prereqs on JSON::Schema::Modern::* submodules have
