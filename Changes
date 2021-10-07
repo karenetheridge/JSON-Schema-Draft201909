@@ -1,5 +1,7 @@
 Revision history for JSON-Schema-Draft201909
 
+{{$NEXT}}
+
 0.130     2021-10-07 03:19:57Z
           - most tests have been removed, as version inconsistencies between
             Test::JSON::Schema::Acceptance and JSON::Schema::Modern can cause
